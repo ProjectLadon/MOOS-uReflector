@@ -20,6 +20,8 @@
 
 using namespace std;
 
+const string BinMarker = "**DEADBEEF**";
+
 class Reflector : public CMOOSApp {
     public:
         Reflector();
@@ -35,6 +37,7 @@ class Reflector : public CMOOSApp {
         void RegisterVariables();
 
     private: // Configuration variables
+        string reflectorHost;
         string txID;
         string txKey;
         string rxID;
@@ -42,6 +45,10 @@ class Reflector : public CMOOSApp {
         vector<string> txVars;
 
     private: // State variables
+        bool loadKeys(string path);
+        bool pushData(string buf);
+        string pullData();
+		static size_t writeMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp);
 };
 
 #endif
