@@ -7,7 +7,7 @@ MOOS endpoint for data reflector service
 * cppcodec (https://github.com/tplgy/cppcodec)
 
 # Theory of Operation
-The reflector has a set of channels, each of which can be read or written to via REST calls. Each channel maps to a single REDIS key, and may in principle contain any data that can be stored in a REDIS byte string, but typical payload is a JSON string. Each write to a channel overwrites all previous data. Therefore, the typical mode of operation is that each channel is a one-way one-to-one or one-to-many communication on each channel. Therefore, a bidrectional communication, such as between ship and shore, takes two channels -- a ship to shore and a shore to ship channel.
+The reflector has a set of channels, each of which can be read or written to via REST calls. Each channel maps to a single REDIS key, and may in principle contain any data that can be stored in a REDIS byte string, but typical payload is a JSON string. Each write to a channel overwrites all previous data. Therefore, the typical mode of operation is that each channel is a one-way one-to-one or one-to-many communication on each channel. Therefore, a bidrectional communication, such as between ship and shore, takes two channels -- a ship to shore channel and a shore to ship channel.
 
 Each subscribed message is packaged into a corresponding JSON type. DOUBLEs are encoded as JSON numbers; STRINGs are encoded as JSON strings, and BINARYs are base-64 encoded as JSON strings. Encoded binary strings are prefaced with \*\*DEADBEEF\*\*  
 
@@ -43,4 +43,4 @@ This variable is published if there is a problem in the configuration.
 This variable is published if there is an unhandled key in the configuration.
 
 ## REFLECTOR_RUN_WARNING
-This variable is published if there is unhandled mail or some other run-time error. 
+This variable is published if there is unhandled mail or some other run-time error.
