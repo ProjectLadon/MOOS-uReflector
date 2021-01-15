@@ -41,3 +41,13 @@ TARGET_LINK_LIBRARIES(uReflector
    m
    pthread
    curl)
+
+find_program(CTAGS ctags)
+if (CTAGS)
+    FIND_FILE(MAKE_CTAGS make_ctags.sh ../..)
+    ADD_CUSTOM_TARGET(reflector_ctags ALL
+        ${MAKE_CTAGS} .
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS uReflector
+    )
+endif(CTAGS)
